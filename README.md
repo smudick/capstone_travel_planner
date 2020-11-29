@@ -5,3 +5,6 @@
 
 ## Wireframes Here
 https://www.figma.com/file/wHVTrLgz59tqB7xvDpwjWw/Capstone-Travel-Planner?node-id=0%3A1
+
+## Project Planning Video
+https://www.loom.com/share/ba0499bdb02049518d8101a9bc378cb1
