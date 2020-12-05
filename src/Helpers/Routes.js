@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../App/Views/Home';
 import Activities from '../App/Views/Activities';
 import ItineraryBuilder from '../App/Views/ItineraryBuilder';
@@ -7,37 +7,50 @@ import SavedItineraries from '../App/Views/SavedItineraries';
 import SingleItinerary from '../App/Views/SingleItinerary';
 import NotFound from '../App/Views/NotFound';
 
-export default function Routes() {
+export default function Routes({ user }) {
   return (
     <div className='App'>
       <Switch>
         <Route
           exact
           path='/'
-          component={() => <Home />}
+          component={() => <Home user={user}/>}
         />
-        <Route
+        <PrivateRoute
           exact
           path='/activities'
-          component={() => <Activities />}
+          component={Activities}
+          user={user}
          />
-        <Route
+        <PrivateRoute
           exact
           path='/build-itinerary'
-          component={() => <ItineraryBuilder />}
+          component={ItineraryBuilder}
+          user={user}
         />
-        <Route
+        <PrivateRoute
           exact
           path='/saved-itineraries'
-          component={() => <SavedItineraries />}
+          component={SavedItineraries}
+          user={user}
         />
-        <Route
+        <PrivateRoute
           exact
           path='/single-itinerary'
-          component={() => <SingleItinerary />}
+          component={SingleItinerary}
+          user={user}
         />
-        <Route component={NotFound} />
+        <Route component={NotFound}/>
       </Switch>
     </div>
   );
 }
+const PrivateRoute = ({ component: Component, user, ...rest }) => {
+  const routeChecker = (componentInfo) => (user ? (
+      <Component {...componentInfo} user={user} />
+  ) : (
+      <Redirect to={{ pathname: '/', state: { from: componentInfo.location } }} />
+  ));
+
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};

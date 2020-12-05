@@ -4,7 +4,7 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  NavbarText,
+  NavItem,
 } from 'reactstrap';
 
 export default class MyNavbar extends React.Component {
@@ -14,14 +14,27 @@ export default class MyNavbar extends React.Component {
   };
 
   render() {
+    const { user } = this.props;
     return (
       <div>
-        <Navbar color='light' light expand='md'>
-          <NavbarBrand href='/'>Travel Planner</NavbarBrand>
-            <Nav className='mr-auto' navbar>
-            </Nav>
-            <NavbarText>Log Out</NavbarText>
-        </Navbar>
+        {user ? (
+          <Navbar color='light' light expand='md'>
+            <NavbarBrand href='/'>Travel Planner</NavbarBrand>
+            <Nav className='mr-auto' navbar></Nav>
+            <NavItem className='logout'>
+              {user && (
+                <button
+                  className='nav-link btn btn-danger m-2'
+                  onClick={this.logMeOut}
+                >
+                  Logout
+                </button>
+              )}
+            </NavItem>
+          </Navbar>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
