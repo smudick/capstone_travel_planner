@@ -23,12 +23,16 @@ export default class Home extends React.Component {
           <div>
             <h1>Home</h1>
             <div className='d-flex justify-content-center'>
-              <button className='btn btn-success'>
-                <Link to='/activities'>Add Activities</Link>
-              </button>
-              <button className='btn btn-secondary'>
-                <Link to='/saved-itineraries'>Saved Itineraries</Link>
-              </button>
+              <Link to='/activities'>
+                <button className='btn btn-success progress-btn'>
+                  Add Activities
+                </button>
+              </Link>
+              <Link to='/saved-itineraries'>
+                <button className='btn btn-secondary save-btn'>
+                  Saved Itineraries
+                </button>
+              </Link>
             </div>
           </div>
         ) : (
