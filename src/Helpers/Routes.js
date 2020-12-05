@@ -23,7 +23,7 @@ export default function Routes() {
          />
         <Route
           exact
-          path='/itinerary-builder'
+          path='/build-itinerary'
           component={() => <ItineraryBuilder />}
         />
         <Route
