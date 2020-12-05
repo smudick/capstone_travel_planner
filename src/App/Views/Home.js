@@ -19,7 +19,7 @@ export default class Home extends React.Component {
     const { user } = this.state;
     return (
       <>
-        {(user !== '') ? (
+        {(user) ? (
           <div>
             <h1>Home</h1>
             <div className='d-flex justify-content-center'>

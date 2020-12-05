@@ -17,21 +17,24 @@ export default class MyNavbar extends React.Component {
     const { user } = this.props;
     return (
       <div>
-        <Navbar color='light' light expand='md'>
-          <NavbarBrand href='/'>Travel Planner</NavbarBrand>
-            <Nav className='mr-auto' navbar>
-            </Nav>
-            <NavItem>
-            {user && (
+        {user ? (
+          <Navbar color='light' light expand='md'>
+            <NavbarBrand href='/'>Travel Planner</NavbarBrand>
+            <Nav className='mr-auto' navbar></Nav>
+            <NavItem className='logout'>
+              {user && (
                 <button
                   className='nav-link btn btn-danger m-2'
                   onClick={this.logMeOut}
                 >
                   Logout
                 </button>
-            )}
+              )}
             </NavItem>
-        </Navbar>
+          </Navbar>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
