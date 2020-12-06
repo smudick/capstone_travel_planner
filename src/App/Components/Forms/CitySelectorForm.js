@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DateSelector from '../DatePicker';
 
 export default class CitySelectorForm extends Component {
@@ -6,6 +7,13 @@ export default class CitySelectorForm extends Component {
     city: 'Nashville',
     date: '',
   };
+
+  componentDidMount = () => {
+    const initialDate = new Date();
+    this.setState({
+      date: initialDate,
+    });
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -19,14 +27,10 @@ export default class CitySelectorForm extends Component {
     });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-  }
-
   render() {
     return (
       <div>
-        <form className='d-flex flex-column align-items-center' onSubmit={this.handleSubmit}>
+        <form className='d-flex flex-column align-items-center'>
           <p>Select a City</p>
           <select
             name='city'
@@ -36,16 +40,24 @@ export default class CitySelectorForm extends Component {
             required
           >
             <option value={'Nashville'}>Nashville</option>
-            <option value={'New-York-City'}>New York City</option>
+            <option value={'New York City'}>New York City</option>
             <option value={'London'}>London</option>
             <option value={'Paris'}>Paris</option>
-            <option value={'Los-Angeles'}>Los Angeles</option>
+            <option value={'Los Angeles'}>Los Angeles</option>
             <option value={'Amsterdam'}>Amsterdam</option>
             <option value={'Chicago'}>Chicago</option>
           </select>
           <p>Select a Date</p>
           <DateSelector getDate={this.getDate}/>
-          <button className='btn progress-btn mt-3'>Submit</button>
+          <Link to={{
+            pathname: '/activities',
+            state: {
+              city: this.state.city,
+              date: this.state.date,
+            },
+          }}>
+            <button className='btn progress-btn mt-3'>Submit</button>
+          </Link>
         </form>
       </div>
     );
