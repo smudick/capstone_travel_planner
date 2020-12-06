@@ -30,7 +30,7 @@ export default class Home extends React.Component {
               <Link to='/saved-itineraries'>
                 <button className='btn btn-secondary save-btn home-btn'>
                   <h3>View Saved Itineraries</h3>
-                  <div><i class="fas fa-book"></i></div>
+                  <div><i className="fas fa-book"></i></div>
                 </button>
               </Link>
             </div>

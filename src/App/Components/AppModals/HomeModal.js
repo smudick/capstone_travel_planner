@@ -12,7 +12,7 @@ const HomeModal = (props) => {
     <div>
       <Button className='btn btn-success progress-btn home-btn' onClick={toggle}>
         <h3>Plan a New Trip</h3>
-        <div><i class="fas fa-plus"></i></div>
+        <div><i className="fas fa-plus"></i></div>
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={'black-text'}>
         <ModalHeader toggle={toggle}>Where are you off to?</ModalHeader>
