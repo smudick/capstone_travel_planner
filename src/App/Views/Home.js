@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../Components/Auth';
 import getUid from '../../Helpers/data/authData';
+import HomeModal from '../Components/AppModals/HomeModal';
+import CitySelectorForm from '../Components/Forms/CitySelectorForm';
 
 export default class Home extends React.Component {
   state = {
@@ -22,16 +24,13 @@ export default class Home extends React.Component {
         {(user) ? (
           <div>
             <div className='d-flex justify-content-center'>
-              <Link to='/activities'>
-                <button className='btn btn-success progress-btn home-btn'>
-                  <h3>Plan a New Trip</h3>
-                  <div><i class="fas fa-plus"></i></div>
-                </button>
-              </Link>
+              <HomeModal title={'Plan a new trip'} buttonLabel={'Plan A New Trip'} className={'progress-btn'}>
+                <CitySelectorForm />
+              </HomeModal>
               <Link to='/saved-itineraries'>
                 <button className='btn btn-secondary save-btn home-btn'>
                   <h3>View Saved Itineraries</h3>
-                  <div><i class="fas fa-book"></i></div>
+                  <div><i className="fas fa-book"></i></div>
                 </button>
               </Link>
             </div>
