@@ -3,22 +3,46 @@ import { Link } from 'react-router-dom';
 import {
   Button, Form, FormGroup, Input,
 } from 'reactstrap';
+import yelpCall from '../../Helpers/data/yelpData';
 
 export default class Activities extends React.Component {
+  state = {
+    city: this.props.location.state.city,
+    date: this.props.location.state.date,
+    term: '',
+    searchResults: {},
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleSearch = (e) => {
+    e.preventDefault();
+
+    yelpCall(this.state.city, this.state.term).then((response) => {
+      const resultsArr = response[0].slice(0, 5);
+      console.warn(resultsArr);
+    });
+  }
+
   render() {
-    const { city, date } = this.props.location.state;
-    const displayDate = date.toDateString();
+    const { city } = this.state;
+    // const displayDate = date.toDateString();
     return (
       <div>
         <div className="d-flex flex-column align-items-center">
           <h2 className='mb-4 mt-2'>Search for things to do in {city}</h2>
-          <Form inline>
+          <Form inline onSubmit={this.handleSearch}>
             <FormGroup className='mb-4 mr-sm-2 mb-sm-0'>
               <Input
                 type='text'
-                name='activities-search'
-                className='act-search'
+                name='term'
                 id='activities-search'
+                onChange={this.handleChange}
+                value={this.state.term}
                 placeholder='Example: coffee or Starbucks'
               />
             </FormGroup>
@@ -29,15 +53,15 @@ export default class Activities extends React.Component {
             Build a custom activity
           </Button>
           </div>
-          <div class="container mb-4 mt-4">
-            <div class="row">
-              <div class="col">
+          <div className="container mb-4 mt-4">
+            <div className="row">
+              <div className="col">
                 <h4>
                 Search Results
                 </h4>
                 <div className='search-results'></div>
               </div>
-              <div class="col">
+              <div className="col">
                 <h4>
                   Saved Activities
                 </h4>
@@ -45,6 +69,7 @@ export default class Activities extends React.Component {
               </div>
             </div>
           </div>
+          <h2 className='mt-4 mb-4'>Once you’re happy with your saved activities, let’s create an itinerary!</h2>
           <Link to='/build-itinerary'>
             <button className='btn progress-btn mt-2'>Build Itinerary</button>
           </Link>
