@@ -13,4 +13,12 @@ const saveSearchResults = (resultObj) => new Promise((resolve, reject) => {
     });
 });
 
-export default { saveSearchResults };
+const getSavedActivities = (city) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/activities.json?orderBy="city"&equalTo="${city}"`).then((response) => {
+      resolve(Object.values(response.data));
+    })
+    .catch((error) => reject(error));
+});
+
+export { saveSearchResults, getSavedActivities };

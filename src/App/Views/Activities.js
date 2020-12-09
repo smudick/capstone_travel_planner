@@ -6,7 +6,8 @@ import {
 import yelpCall from '../../Helpers/data/yelpData';
 import Loader from '../Components/Loader';
 import ResultsCard from '../Components/Cards/ResultsCard';
-import activitiesData from '../../Helpers/data/activitiesData';
+import SavedCard from '../Components/Cards/SavedCard';
+import { saveSearchResults, getSavedActivities } from '../../Helpers/data/activitiesData';
 
 export default class Activities extends React.Component {
   state = {
@@ -14,7 +15,12 @@ export default class Activities extends React.Component {
     date: this.props.location.state.date,
     term: '',
     searchResults: [],
+    savedActivites: [],
     searching: false,
+  }
+
+  componentDidMount() {
+    this.getSavedCards();
   }
 
   handleChange = (e) => {
@@ -55,17 +61,36 @@ export default class Activities extends React.Component {
     const savedResult = this.state.searchResults.filter(
       (res) => res.yelpId === e.target.id,
     );
-    activitiesData.saveSearchResults(savedResult[0]);
+    saveSearchResults(savedResult[0]).then((response) => {
+      this.getSavedCards();
+      return (response);
+    });
+  }
+
+  getSavedCards = () => {
+    getSavedActivities(this.state.city).then((response) => {
+      this.setState({
+        savedActivites: response,
+      });
+    });
   }
 
   render() {
-    const { city, searching, searchResults } = this.state;
+    const {
+      city, searching, searchResults, savedActivites,
+    } = this.state;
     const showResults = () => searchResults.map((res) => (
       <ResultsCard
         key={res.yelpId}
         result={res}
         saveResult={this.saveResult}
       />
+    ));
+    const showSavedCards = () => savedActivites.map((act) => (
+          <SavedCard
+            key={act.firebaseKey}
+            activity={act}
+          />
     ));
     return (
       <div>
@@ -99,7 +124,7 @@ export default class Activities extends React.Component {
                   {searching ? (
                     <Loader />
                   ) : (
-                    <div className='d-flex flex-wrap justify-content-center'>
+                  <div className='d-flex flex-wrap justify-content-center'>
                     {showResults()}
                   </div>
                   )}
@@ -109,15 +134,19 @@ export default class Activities extends React.Component {
                 <h4>
                   Saved Activities
                 </h4>
-                <div className='saved-activities'></div>
+                <div className='saved-activities'>
+                  <div className='d-flex flex-wrap justify-content-center'>
+                    {showSavedCards()}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
           <h2 className='mt-4 mb-4'>Once you’re happy with your saved activities, let’s create an itinerary!</h2>
           <Link to='/build-itinerary'>
             <button className='btn progress-btn mt-2'>Build Itinerary</button>
           </Link>
       </div>
+    </div>
     );
   }
 }
