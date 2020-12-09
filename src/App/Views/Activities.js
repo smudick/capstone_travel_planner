@@ -6,6 +6,8 @@ import {
 import yelpCall from '../../Helpers/data/yelpData';
 import Loader from '../Components/Loader';
 import ResultsCard from '../Components/Cards/ResultsCard';
+import SavedCard from '../Components/Cards/SavedCard';
+import { saveSearchResults, getSavedActivities } from '../../Helpers/data/activitiesData';
 
 export default class Activities extends React.Component {
   state = {
@@ -13,7 +15,12 @@ export default class Activities extends React.Component {
     date: this.props.location.state.date,
     term: '',
     searchResults: [],
+    savedActivites: [],
     searching: false,
+  }
+
+  componentDidMount() {
+    this.getSavedCards();
   }
 
   handleChange = (e) => {
@@ -31,23 +38,59 @@ export default class Activities extends React.Component {
 
     yelpCall(this.state.city, this.state.term).then((response) => {
       const resultsArr = response[0].slice(0, 5);
+      const cleanResults = resultsArr.map((res) => (
+        {
+          yelpId: res.id,
+          name: res.name,
+          image_url: res.image_url,
+          url: res.url,
+          review_count: res.review_count,
+          rating: res.rating,
+          address: res.location.display_address,
+          city: this.state.city,
+        }
+      ));
       this.setState({
-        searchResults: resultsArr,
+        searchResults: cleanResults,
         searching: false,
       });
     });
   }
 
+  saveResult = (e) => {
+    const savedResult = this.state.searchResults.filter(
+      (res) => res.yelpId === e.target.id,
+    );
+    saveSearchResults(savedResult[0]).then((response) => {
+      this.getSavedCards();
+      return (response);
+    });
+  }
+
+  getSavedCards = () => {
+    getSavedActivities(this.state.city).then((response) => {
+      this.setState({
+        savedActivites: response,
+      });
+    });
+  }
+
   render() {
-    const { city, searching, searchResults } = this.state;
-    searchResults.map((res) => (
-      console.warn(res.name, res.rating, res.url, res.image_url, res.location.display_address[0])
-    ));
+    const {
+      city, searching, searchResults, savedActivites,
+    } = this.state;
     const showResults = () => searchResults.map((res) => (
       <ResultsCard
-        key={res.firebaseKey}
+        key={res.yelpId}
         result={res}
+        saveResult={this.saveResult}
       />
+    ));
+    const showSavedCards = () => savedActivites.map((act) => (
+          <SavedCard
+            key={act.firebaseKey}
+            activity={act}
+          />
     ));
     return (
       <div>
@@ -81,7 +124,7 @@ export default class Activities extends React.Component {
                   {searching ? (
                     <Loader />
                   ) : (
-                    <div className='d-flex flex-wrap justify-content-center'>
+                  <div className='d-flex flex-wrap justify-content-center'>
                     {showResults()}
                   </div>
                   )}
@@ -91,15 +134,19 @@ export default class Activities extends React.Component {
                 <h4>
                   Saved Activities
                 </h4>
-                <div className='saved-activities'></div>
+                <div className='saved-activities'>
+                  <div className='d-flex flex-wrap justify-content-center'>
+                    {showSavedCards()}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
           <h2 className='mt-4 mb-4'>Once you’re happy with your saved activities, let’s create an itinerary!</h2>
           <Link to='/build-itinerary'>
             <button className='btn progress-btn mt-2'>Build Itinerary</button>
           </Link>
       </div>
+    </div>
     );
   }
 }
