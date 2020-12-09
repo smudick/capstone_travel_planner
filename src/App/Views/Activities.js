@@ -4,13 +4,16 @@ import {
   Button, Form, FormGroup, Input,
 } from 'reactstrap';
 import yelpCall from '../../Helpers/data/yelpData';
+import Loader from '../Components/Loader';
+import ResultsCard from '../Components/Cards/ResultsCard';
 
 export default class Activities extends React.Component {
   state = {
     city: this.props.location.state.city,
     date: this.props.location.state.date,
     term: '',
-    searchResults: {},
+    searchResults: [],
+    searching: false,
   }
 
   handleChange = (e) => {
@@ -21,16 +24,31 @@ export default class Activities extends React.Component {
 
   handleSearch = (e) => {
     e.preventDefault();
+    this.setState({
+      searchResults: [],
+      searching: true,
+    });
 
     yelpCall(this.state.city, this.state.term).then((response) => {
       const resultsArr = response[0].slice(0, 5);
-      console.warn(resultsArr);
+      this.setState({
+        searchResults: resultsArr,
+        searching: false,
+      });
     });
   }
 
   render() {
-    const { city } = this.state;
-    // const displayDate = date.toDateString();
+    const { city, searching, searchResults } = this.state;
+    searchResults.map((res) => (
+      console.warn(res.name, res.rating, res.url, res.image_url, res.location.display_address[0])
+    ));
+    const showResults = () => searchResults.map((res) => (
+      <ResultsCard
+        key={res.firebaseKey}
+        result={res}
+      />
+    ));
     return (
       <div>
         <div className="d-flex flex-column align-items-center">
@@ -59,7 +77,15 @@ export default class Activities extends React.Component {
                 <h4>
                 Search Results
                 </h4>
-                <div className='search-results'></div>
+                <div className='search-results'>
+                  {searching ? (
+                    <Loader />
+                  ) : (
+                    <div className='d-flex flex-wrap justify-content-center'>
+                    {showResults()}
+                  </div>
+                  )}
+                </div>
               </div>
               <div className="col">
                 <h4>
