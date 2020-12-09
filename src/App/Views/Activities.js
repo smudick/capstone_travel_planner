@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import yelpCall from '../../Helpers/data/yelpData';
 import Loader from '../Components/Loader';
+import ResultsCard from '../Components/Cards/ResultsCard';
 
 export default class Activities extends React.Component {
   state = {
@@ -42,6 +43,12 @@ export default class Activities extends React.Component {
     searchResults.map((res) => (
       console.warn(res.name, res.rating, res.url, res.image_url, res.location.display_address[0])
     ));
+    const showResults = () => searchResults.map((res) => (
+      <ResultsCard
+        key={res.firebaseKey}
+        result={res}
+      />
+    ));
     return (
       <div>
         <div className="d-flex flex-column align-items-center">
@@ -74,7 +81,9 @@ export default class Activities extends React.Component {
                   {searching ? (
                     <Loader />
                   ) : (
-                    <></>
+                    <div className='d-flex flex-wrap justify-content-center'>
+                    {showResults()}
+                  </div>
                   )}
                 </div>
               </div>
