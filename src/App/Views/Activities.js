@@ -7,7 +7,9 @@ import yelpCall from '../../Helpers/data/yelpData';
 import Loader from '../Components/Loader';
 import ResultsCard from '../Components/Cards/ResultsCard';
 import SavedCard from '../Components/Cards/SavedCard';
-import { saveSearchResults, getSavedActivities } from '../../Helpers/data/activitiesData';
+import activitesData from '../../Helpers/data/activitiesData';
+import ActivityModal from '../Components/AppModals/ActivityModal';
+import ActivityForm from '../Components/Forms/ActivityForm';
 
 export default class Activities extends React.Component {
   state = {
@@ -61,14 +63,16 @@ export default class Activities extends React.Component {
     const savedResult = this.state.searchResults.filter(
       (res) => res.yelpId === e.target.id,
     );
-    saveSearchResults(savedResult[0]).then((response) => {
+    // eslint-disable-next-line import/no-named-as-default-member
+    activitesData.saveSearchResults(savedResult[0]).then((response) => {
       this.getSavedCards();
       return (response);
     });
   }
 
   getSavedCards = () => {
-    getSavedActivities(this.state.city).then((response) => {
+    // eslint-disable-next-line import/no-named-as-default-member
+    activitesData.getSavedActivities(this.state.city).then((response) => {
       this.setState({
         savedActivites: response,
       });
@@ -110,9 +114,9 @@ export default class Activities extends React.Component {
             <Button className='progress-btn'>Submit</Button>
           </Form>
           <h3 className='mb-4 mt-4'>Or, if you can't find what you're looking for</h3>
-          <Button className='custom-btn'>
-            Build a custom activity
-          </Button>
+          <ActivityModal title={'Create A Custom Activity'} buttonLabel={'Create A Custom Activity'} buttonColor={'primary'}>
+            <ActivityForm onUpdate={this.getSavedCards} city={city} />
+          </ActivityModal>
           </div>
           <div className="container mb-4 mt-4">
             <div className="row">
