@@ -21,4 +21,4 @@ const getSavedActivities = (city) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { saveSearchResults, getSavedActivities };
+export default { saveSearchResults, getSavedActivities };

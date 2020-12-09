@@ -20,10 +20,16 @@ export default class SavedCard extends Component {
         </a>
         <CardBody className='saved-card'>
           <CardTitle tag="h5">{activity.name}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">Rating: {activity.rating} stars from {activity.review_count} reviews</CardSubtitle>
-          <CardText>
-              {displayAddress()}
-          </CardText>
+          {activity.yelpId ? (
+          <>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">Rating: {activity.rating} stars from {activity.review_count} reviews</CardSubtitle>
+            <CardText>
+                {displayAddress()}
+            </CardText>
+          </>
+          ) : (
+            <CardText>{activity.address}</CardText>
+          )}
         </CardBody>
       </Card>
     </div>
