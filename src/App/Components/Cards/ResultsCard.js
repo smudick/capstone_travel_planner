@@ -6,7 +6,12 @@ import {
 
 export default class ResultsCard extends Component {
   render() {
-    const { result } = this.props;
+    const { result, saveResult } = this.props;
+    const displayAddress = () => result.address.map((line) => (
+      `${line}
+      
+      `
+    ));
     return (
       <div>
       <Card>
@@ -15,15 +20,11 @@ export default class ResultsCard extends Component {
         </a>
         <CardBody>
           <CardTitle tag="h5">{result.name}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">Rating: {result.rating} stars</CardSubtitle>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">Rating: {result.rating} stars from {result.review_count} reviews</CardSubtitle>
           <CardText>
-            <p>
-              {result.location.display_address[0]}
-              <br></br>
-              {result.location.display_address[1]}
-            </p>
+              {displayAddress()}
           </CardText>
-          <Button className='save-btn'>Save</Button>
+          <Button className='save-btn' id={result.yelpId} onClick={(e) => saveResult(e)}>Save</Button>
         </CardBody>
       </Card>
     </div>

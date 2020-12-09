@@ -6,6 +6,7 @@ import {
 import yelpCall from '../../Helpers/data/yelpData';
 import Loader from '../Components/Loader';
 import ResultsCard from '../Components/Cards/ResultsCard';
+import activitiesData from '../../Helpers/data/activitiesData';
 
 export default class Activities extends React.Component {
   state = {
@@ -31,22 +32,39 @@ export default class Activities extends React.Component {
 
     yelpCall(this.state.city, this.state.term).then((response) => {
       const resultsArr = response[0].slice(0, 5);
+      const cleanResults = resultsArr.map((res) => (
+        {
+          yelpId: res.id,
+          name: res.name,
+          image_url: res.image_url,
+          url: res.url,
+          review_count: res.review_count,
+          rating: res.rating,
+          address: res.location.display_address,
+          city: this.state.city,
+        }
+      ));
       this.setState({
-        searchResults: resultsArr,
+        searchResults: cleanResults,
         searching: false,
       });
     });
   }
 
+  saveResult = (e) => {
+    const savedResult = this.state.searchResults.filter(
+      (res) => res.yelpId === e.target.id,
+    );
+    activitiesData.saveSearchResults(savedResult[0]);
+  }
+
   render() {
     const { city, searching, searchResults } = this.state;
-    searchResults.map((res) => (
-      console.warn(res.name, res.rating, res.url, res.image_url, res.location.display_address[0])
-    ));
     const showResults = () => searchResults.map((res) => (
       <ResultsCard
-        key={res.firebaseKey}
+        key={res.yelpId}
         result={res}
+        saveResult={this.saveResult}
       />
     ));
     return (
