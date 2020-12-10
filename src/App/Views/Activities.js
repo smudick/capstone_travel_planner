@@ -79,6 +79,15 @@ export default class Activities extends React.Component {
     });
   }
 
+  removeCard = (e) => {
+    const removedActivity = this.state.savedActivites.filter(
+      (act) => act.firebaseKey === e.target.id,
+    );
+    activitesData.deleteActivities(removedActivity[0].firebaseKey).then(() => {
+      this.getSavedCards();
+    });
+  }
+
   render() {
     const {
       city, searching, searchResults, savedActivites,
@@ -91,10 +100,11 @@ export default class Activities extends React.Component {
       />
     ));
     const showSavedCards = () => savedActivites.map((act) => (
-          <SavedCard
-            key={act.firebaseKey}
-            activity={act}
-          />
+      <SavedCard
+        key={act.firebaseKey}
+        activity={act}
+        remove={this.removeCard}
+      />
     ));
     return (
       <div>
