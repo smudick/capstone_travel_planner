@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
   Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle,
+  CardTitle, CardSubtitle, Button,
 } from 'reactstrap';
 
 export default class SavedCard extends Component {
   render() {
-    const { activity } = this.props;
+    const { activity, remove } = this.props;
     const displayAddress = () => activity.address.map((line) => (
       `${line}
       
@@ -30,6 +30,7 @@ export default class SavedCard extends Component {
           ) : (
             <CardText>{activity.address}</CardText>
           )}
+          <Button className='btn btn-danger' id={activity.firebaseKey} onClick={(e) => remove(e)}>Remove</Button>
         </CardBody>
       </Card>
     </div>

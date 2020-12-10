@@ -21,4 +21,6 @@ const getSavedActivities = (city) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { saveSearchResults, getSavedActivities };
+const deleteActivities = (firebaseKey) => axios.delete(`${baseUrl}/activities/${firebaseKey}.json`);
+
+export default { saveSearchResults, getSavedActivities, deleteActivities };
