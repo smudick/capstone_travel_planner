@@ -13,10 +13,17 @@ const saveSearchResults = (resultObj) => new Promise((resolve, reject) => {
     });
 });
 
-const getSavedActivities = (city) => new Promise((resolve, reject) => {
+const getSavedActivities = (city, userId) => new Promise((resolve, reject) => {
   axios
-    .get(`${baseUrl}/activities.json?orderBy="city"&equalTo="${city}"`).then((response) => {
-      resolve(Object.values(response.data));
+    .get(`${baseUrl}/activities.json?orderBy="userId"&equalTo="${userId}"`).then((response) => {
+      const allActivities = Object.values(response.data);
+      const userActivities = [];
+      allActivities.forEach((act) => {
+        if (act.city === city) {
+          userActivities.push(act);
+        }
+      });
+      resolve(userActivities);
     })
     .catch((error) => reject(error));
 });
