@@ -21,6 +21,16 @@ const getSavedActivities = (city) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const editActivity = (actObj) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${baseUrl}/activities/${actObj.firebaseKey}.json`, actObj)
+    .then((response) => {
+      resolve(response);
+    }).catch((error) => reject(error));
+});
+
 const deleteActivities = (firebaseKey) => axios.delete(`${baseUrl}/activities/${firebaseKey}.json`);
 
-export default { saveSearchResults, getSavedActivities, deleteActivities };
+export default {
+  saveSearchResults, getSavedActivities, deleteActivities, editActivity,
+};
