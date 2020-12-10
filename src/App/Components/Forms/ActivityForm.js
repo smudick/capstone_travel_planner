@@ -8,10 +8,10 @@ export default class ActivityForm extends Component {
   state = {
     firebaseKey: this.props.activity?.firebaseKey || '',
     name: this.props.activity?.name || '',
-    image_url: this.props.activity?.imageUrl || '',
+    image_url: this.props.activity?.image_url || '',
     userId: this.props.activity?.userId || '',
     address: this.props.activity?.address || '',
-    city: this.props.city,
+    city: this.props.city || this.props.activity.city,
     success: false,
   };
 
@@ -46,19 +46,30 @@ export default class ActivityForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    activitiesData.saveSearchResults(this.state).then(() => {
-      this.props.onUpdate();
-      this.setState({
-        success: true,
+
+    if (this.state.firebaseKey === '') {
+      activitiesData.saveSearchResults(this.state).then(() => {
+        this.props.onUpdate();
+        this.setState({
+          success: true,
+        });
       });
-    });
+    } else {
+      activitiesData.editActivity(this.state).then(() => {
+        this.props.onUpdate();
+        this.setState({
+          success: true,
+        });
+      });
+    }
   };
 
   render() {
+    console.warn(this.props.onUpdate);
     return (
       <form onSubmit={this.handleSubmit}>
         {this.state.success === true ? (
-          <div class='alert alert-success' role='alert'>
+          <div className='alert alert-success' role='alert'>
             Success!
           </div>
         ) : (

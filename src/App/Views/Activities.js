@@ -104,6 +104,7 @@ export default class Activities extends React.Component {
         key={act.firebaseKey}
         activity={act}
         remove={this.removeCard}
+        update={this.getSavedCards}
       />
     ));
     return (
