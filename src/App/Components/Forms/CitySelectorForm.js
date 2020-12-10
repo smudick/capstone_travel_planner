@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DateSelector from '../DatePicker';
+import getUid from '../../../Helpers/data/authData';
 
 export default class CitySelectorForm extends Component {
   state = {
     city: 'Nashville',
     date: '',
+    userId: '',
   };
 
   componentDidMount = () => {
     const initialDate = new Date();
+    const userId = getUid();
+    this.setState({
+      userId,
+    });
     this.setState({
       date: initialDate,
     });
@@ -54,6 +60,7 @@ export default class CitySelectorForm extends Component {
             state: {
               city: this.state.city,
               date: this.state.date,
+              userId: this.state.userId,
             },
           }}>
             <button className='btn progress-btn mt-3'>Submit</button>

@@ -19,6 +19,7 @@ export default class Activities extends React.Component {
     searchResults: [],
     savedActivites: [],
     searching: false,
+    userId: this.props.location.state.userId,
   }
 
   componentDidMount() {
@@ -50,6 +51,7 @@ export default class Activities extends React.Component {
           rating: res.rating,
           address: res.location.display_address,
           city: this.state.city,
+          userId: this.state.userId,
         }
       ));
       this.setState({
@@ -72,7 +74,7 @@ export default class Activities extends React.Component {
 
   getSavedCards = () => {
     // eslint-disable-next-line import/no-named-as-default-member
-    activitesData.getSavedActivities(this.state.city).then((response) => {
+    activitesData.getSavedActivities(this.state.city, this.state.userId).then((response) => {
       this.setState({
         savedActivites: response,
       });
