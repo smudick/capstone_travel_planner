@@ -159,7 +159,12 @@ export default class Activities extends React.Component {
               </div>
             </div>
           <h2 className='mt-4 mb-4'>Once you’re happy with your saved activities, let’s create an itinerary!</h2>
-          <Link to='/build-itinerary'>
+          <Link to={{
+            pathname: '/build-itinerary',
+            props: {
+              showCards: { showSavedCards },
+            },
+          }}>
             <button className='btn progress-btn mt-2'>Build Itinerary</button>
           </Link>
       </div>
