@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom';
 import {
   Col,
   Button,
-  Form,
-  FormGroup,
   Container,
-  Input,
-  Row,
   Table,
 } from 'reactstrap';
+import ActivityModal from '../Components/AppModals/ActivityModal';
 
 export default class ItineraryBuilder extends React.Component {
   render() {
@@ -34,9 +31,9 @@ export default class ItineraryBuilder extends React.Component {
                 {hour} {hourType}
               </h4>
             </td>
-            <td className='agenda-events'>
-              <div className='agenda-event'>
-                <Button>Select an Activity</Button>
+            <td>
+              <div>
+                <ActivityModal title={'Select a Saved Activity'} buttonLabel={'Select a Saved Activity'} buttonColor={'secondary'}></ActivityModal>
               </div>
             </td>
           </tr>,
