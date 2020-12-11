@@ -7,7 +7,7 @@ import yelpCall from '../../Helpers/data/yelpData';
 import Loader from '../Components/Loader';
 import ResultsCard from '../Components/Cards/ResultsCard';
 import SavedCard from '../Components/Cards/SavedCard';
-import activitesData from '../../Helpers/data/activitiesData';
+import activitiesData from '../../Helpers/data/activitiesData';
 import ActivityModal from '../Components/AppModals/ActivityModal';
 import ActivityForm from '../Components/Forms/ActivityForm';
 
@@ -17,7 +17,7 @@ export default class Activities extends React.Component {
     date: this.props.location.state.date,
     term: '',
     searchResults: [],
-    savedActivites: [],
+    savedActivities: [],
     searching: false,
     userId: this.props.location.state.userId,
   }
@@ -66,7 +66,7 @@ export default class Activities extends React.Component {
       (res) => res.yelpId === e.target.id,
     );
     // eslint-disable-next-line import/no-named-as-default-member
-    activitesData.saveSearchResults(savedResult[0]).then((response) => {
+    activitiesData.saveSearchResults(savedResult[0]).then((response) => {
       this.getSavedCards();
       return (response);
     });
@@ -74,25 +74,25 @@ export default class Activities extends React.Component {
 
   getSavedCards = () => {
     // eslint-disable-next-line import/no-named-as-default-member
-    activitesData.getSavedActivities(this.state.city, this.state.userId).then((response) => {
+    activitiesData.getSavedActivities(this.state.city, this.state.userId).then((response) => {
       this.setState({
-        savedActivites: response,
+        savedActivities: response,
       });
     });
   }
 
   removeCard = (e) => {
-    const removedActivity = this.state.savedActivites.filter(
+    const removedActivity = this.state.savedActivities.filter(
       (act) => act.firebaseKey === e.target.id,
     );
-    activitesData.deleteActivities(removedActivity[0].firebaseKey).then(() => {
+    activitiesData.deleteActivities(removedActivity[0].firebaseKey).then(() => {
       this.getSavedCards();
     });
   }
 
   render() {
     const {
-      city, searching, searchResults, savedActivites,
+      city, searching, searchResults, savedActivities, date,
     } = this.state;
     const showResults = () => searchResults.map((res) => (
       <ResultsCard
@@ -101,7 +101,7 @@ export default class Activities extends React.Component {
         saveResult={this.saveResult}
       />
     ));
-    const showSavedCards = () => savedActivites.map((act) => (
+    const showSavedCards = () => savedActivities.map((act) => (
       <SavedCard
         key={act.firebaseKey}
         activity={act}
@@ -161,8 +161,10 @@ export default class Activities extends React.Component {
           <h2 className='mt-4 mb-4'>Once you’re happy with your saved activities, let’s create an itinerary!</h2>
           <Link to={{
             pathname: '/build-itinerary',
-            props: {
-              showCards: { showSavedCards },
+            state: {
+              savedActivities,
+              city,
+              date,
             },
           }}>
             <button className='btn progress-btn mt-2'>Build Itinerary</button>
