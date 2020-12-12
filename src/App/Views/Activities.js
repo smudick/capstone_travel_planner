@@ -92,7 +92,7 @@ export default class Activities extends React.Component {
 
   render() {
     const {
-      city, searching, searchResults, savedActivities, date,
+      city, searching, searchResults, savedActivities, date, userId,
     } = this.state;
     const showResults = () => searchResults.map((res) => (
       <ResultsCard
@@ -165,6 +165,7 @@ export default class Activities extends React.Component {
               savedActivities,
               city,
               date,
+              userId,
             },
           }}>
             <button className='btn progress-btn mt-2'>Build Itinerary</button>
