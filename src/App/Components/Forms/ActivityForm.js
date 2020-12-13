@@ -65,7 +65,6 @@ export default class ActivityForm extends Component {
   };
 
   render() {
-    console.warn(this.props.onUpdate);
     return (
       <form onSubmit={this.handleSubmit}>
         {this.state.success === true ? (
