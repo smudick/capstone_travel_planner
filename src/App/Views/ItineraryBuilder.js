@@ -33,8 +33,21 @@ export default class ItineraryBuilder extends React.Component {
     joinTableData
       .getScheduledActivities(this.state.itineraryId)
       .then((response) => {
+        function compare(a, b) {
+          const activityA = Number(a.startTime);
+          const activityB = Number(b.startTime);
+
+          let comparison = 0;
+          if (activityA > activityB) {
+            comparison = 1;
+          } else if (activityA < activityB) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+        const orderedActivities = response.sort(compare);
         this.setState({
-          scheduledActivities: response,
+          scheduledActivities: orderedActivities,
         });
       });
   };
