@@ -1,4 +1,5 @@
 import axios from 'axios';
+import joinTableData from './joinTableData';
 
 const baseUrl = 'https://travel-planner-7b38c-default-rtdb.firebaseio.com/';
 
@@ -36,19 +37,19 @@ const editActivity = (actObj) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-const deleteActivities = (firebaseKey) => axios.delete(`${baseUrl}/activities/${firebaseKey}.json`);
-// .then(() => {
-//   axios.get(`${baseUrl}/scheduledActivities.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`)
-//     .then((response) => {
-//       const responseArray = Object.values(response);
-//       responseArray.forEach((respArr) => {
-//         const pinBoardIdsArray = Object.keys(respArr);
-//         pinBoardIdsArray.forEach((id) => {
-//           boardData.deletePinBoard(id);
-//         });
-//       });
-//     });
-// });
+const deleteActivities = (firebaseKey) => axios.delete(`${baseUrl}/activities/${firebaseKey}.json`)
+  .then(() => {
+    axios.get(`${baseUrl}/scheduledActivities.json?orderBy="activityId"&equalTo="${firebaseKey}"`)
+      .then((response) => {
+        const responseArray = Object.values(response);
+        responseArray.forEach((respArr) => {
+          const scheduledActivitiesIdsArray = Object.keys(respArr);
+          scheduledActivitiesIdsArray.forEach((id) => {
+            joinTableData.removeScheduledActivities(id);
+          });
+        });
+      });
+  });
 
 export default {
   saveSearchResults, getSavedActivities, deleteActivities, editActivity,
