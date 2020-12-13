@@ -13,4 +13,13 @@ const createScheduledActivity = (obj) => new Promise((resolve, reject) => {
     });
 });
 
-export default { createScheduledActivity };
+const getScheduledActivities = (itineraryId) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/scheduledActivities.json?orderBy="itineraryId"&equalTo="${itineraryId}"`).then((response) => {
+      const itineraryActivities = Object.values(response.data);
+      resolve(itineraryActivities);
+    })
+    .catch((error) => reject(error));
+});
+
+export default { createScheduledActivity, getScheduledActivities };

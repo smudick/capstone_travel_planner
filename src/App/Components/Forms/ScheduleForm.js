@@ -1,33 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Form, Input } from 'reactstrap';
-import getUid from '../../../Helpers/data/authData';
-import itineraryData from '../../../Helpers/data/itineraryData';
 import joinTableData from '../../../Helpers/data/joinTableData';
 
 export default class ScheduleForm extends Component {
   state =({
-    name: this.props.activity?.name || '',
     length: '',
-    city: this.props.city,
-    date: this.props.date,
     startTime: '',
     userId: this.props.userId,
-    itineraryId: '',
-    activity: this.props.activity,
+    itineraryId: this.props.itineraryId,
+    name: '',
   })
-
-  componentDidMount() {
-    const userId = getUid();
-    let currentItin;
-    itineraryData.getItineraries(userId).then((response) => {
-      currentItin = response.filter((res) => res.date === this.state.date);
-      console.warn(currentItin[0].firebaseKey);
-      this.setState({
-        userId,
-        itineraryId: currentItin[0].firebaseKey,
-      });
-    });
-  }
 
   handleChange = (e) => {
     this.setState({
@@ -49,7 +31,7 @@ export default class ScheduleForm extends Component {
       const times = [];
       for (let i = 1; i <= 24; i += 1) {
         times.push(
-          <option>{i}:00</option>,
+          <option>{i}</option>,
         );
       }
       return times;
@@ -60,8 +42,8 @@ export default class ScheduleForm extends Component {
           <p>Select an Activity</p>
           <Input
             type='select'
-            name='activity'
-            value={this.state.actiivity}
+            name='name'
+            value={this.state.name}
             onChange={this.handleChange}
             className='form-control form-control-md mb-2'
             required
@@ -69,7 +51,7 @@ export default class ScheduleForm extends Component {
             <option></option>
             {activitySelector()}
           </Input>
-          <p>What would you like to start?</p>
+          <p>What time would you like to start?</p>
           <Input
             type='select'
             name='startTime'
@@ -81,7 +63,7 @@ export default class ScheduleForm extends Component {
             <option></option>
             {timeRender()}
           </Input>
-          <p>How long will this activity be?</p>
+          <p>How many hours will you be there?</p>
           <Input
             type='select'
             name='length'
@@ -91,11 +73,11 @@ export default class ScheduleForm extends Component {
             required
           >
             <option></option>
-            <option>1 Hour</option>
-            <option>2 Hours</option>
-            <option>3 Hours</option>
-            <option>4 Hours</option>
-            <option>5 Hours</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
           </Input>
           <Button>Submit</Button>
         </Form>

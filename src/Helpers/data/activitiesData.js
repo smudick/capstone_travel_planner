@@ -17,13 +17,13 @@ const getSavedActivities = (city, userId) => new Promise((resolve, reject) => {
   axios
     .get(`${baseUrl}/activities.json?orderBy="userId"&equalTo="${userId}"`).then((response) => {
       const allActivities = Object.values(response.data);
-      const userActivities = [];
+      const cityActivities = [];
       allActivities.forEach((act) => {
         if (act.city === city) {
-          userActivities.push(act);
+          cityActivities.push(act);
         }
       });
-      resolve(userActivities);
+      resolve(cityActivities);
     })
     .catch((error) => reject(error));
 });
