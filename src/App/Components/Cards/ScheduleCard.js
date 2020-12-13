@@ -11,18 +11,13 @@ export default class ScheduleCard extends Component {
       activity, remove, activities, update,
     } = this.props;
     const endTime = Number(activity.startTime) + Number(activity.length);
-    const showAddress = () => {
+    const showAddress = () => activities.map((act) => {
       let address = '';
-      activities.forEach((act) => {
-        if (act.name === activity) {
-          console.warn(activity.address);
-          address = <CardText>{activity.address}</CardText>;
-        } else {
-          address = <></>;
-        }
-      });
+      if (act.name === activity.name) {
+        address = act.address.toString();
+      }
       return address;
-    };
+    });
     return (
       <Card
         style={{ height: `${activity.length}00px` }}
@@ -34,7 +29,7 @@ export default class ScheduleCard extends Component {
           {activity.startTime}:00 - {endTime}:00
         </CardText>
         <CardTitle tag='h5'>{activity.name}</CardTitle>
-        {showAddress()}
+        <CardText>{showAddress()}</CardText>
         <Button
           className='btn btn-danger'
           id={activity.firebaseKey}
