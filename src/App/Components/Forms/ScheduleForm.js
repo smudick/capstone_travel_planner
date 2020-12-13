@@ -4,11 +4,12 @@ import joinTableData from '../../../Helpers/data/joinTableData';
 
 export default class ScheduleForm extends Component {
   state =({
-    length: '',
-    startTime: '',
+    firebaseKey: this.props.activity?.firebaseKey || '',
+    length: this.props.activity?.length || '',
+    startTime: this.props.activity?.startTime || '',
     userId: this.props.userId,
     itineraryId: this.props.itineraryId,
-    name: '',
+    name: this.props.activity?.name || '',
   })
 
   handleChange = (e) => {
@@ -19,10 +20,15 @@ export default class ScheduleForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    joinTableData.createScheduledActivity(this.state).then(() => {
-      this.props.update();
-    });
+    if (this.state.name === '') {
+      joinTableData.createScheduledActivity(this.state).then(() => {
+        this.props.update();
+      });
+    } else {
+      joinTableData.editScheduledActivity(this.state).then(() => {
+        this.props.update();
+      });
+    }
   }
 
   render() {

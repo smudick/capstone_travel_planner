@@ -24,6 +24,14 @@ const getScheduledActivities = (itineraryId) => new Promise((resolve, reject) =>
 
 const removeScheduledActivities = (joinTableId) => axios.delete(`${baseUrl}/scheduledActivities/${joinTableId}.json`);
 
+const editScheduledActivity = (obj) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${baseUrl}/scheduledActivities/${obj.firebaseKey}.json`, obj)
+    .then((response) => {
+      resolve(response);
+    }).catch((error) => reject(error));
+});
+
 export default {
-  createScheduledActivity, getScheduledActivities, removeScheduledActivities,
+  createScheduledActivity, getScheduledActivities, removeScheduledActivities, editScheduledActivity,
 };

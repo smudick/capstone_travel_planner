@@ -71,7 +71,13 @@ export default class ItineraryBuilder extends React.Component {
       scheduledActivities,
     } = this.state;
     const showSchedule = () => scheduledActivities.map((act) => (
-        <ScheduleCard key={act.firebaseKey} activity={act} remove={this.removeScheduledActivity}/>
+        <ScheduleCard
+          key={act.firebaseKey}
+          activities={activities}
+          activity={act}
+          remove={this.removeScheduledActivity}
+          update={this.getActivities}
+        />
     ));
     return (
       <Container>
