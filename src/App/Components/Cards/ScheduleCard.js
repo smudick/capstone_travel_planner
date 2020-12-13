@@ -6,12 +6,13 @@ import {
 
 export default class ScheduleCard extends Component {
   render() {
-    const { activity } = this.props;
+    const { activity, remove } = this.props;
     const endTime = Number(activity.startTime) + Number(activity.length);
     return (
       <Card style={{ height: `${activity.length}00px` }} body outline color="secondary">
         <CardText>{activity.startTime}:00 - {endTime}:00</CardText>
         <CardTitle tag="h5">{activity.name}</CardTitle>
+        <Button className='btn btn-danger' id={activity.firebaseKey} onClick={(e) => remove(e)}>Remove</Button>
       </Card>
     );
   }

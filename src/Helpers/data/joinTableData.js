@@ -22,4 +22,8 @@ const getScheduledActivities = (itineraryId) => new Promise((resolve, reject) =>
     .catch((error) => reject(error));
 });
 
-export default { createScheduledActivity, getScheduledActivities };
+const removeScheduledActivities = (joinTableId) => axios.delete(`${baseUrl}/scheduledActivities/${joinTableId}.json`);
+
+export default {
+  createScheduledActivity, getScheduledActivities, removeScheduledActivities,
+};

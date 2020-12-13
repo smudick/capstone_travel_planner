@@ -52,6 +52,15 @@ export default class ItineraryBuilder extends React.Component {
       });
   };
 
+  removeScheduledActivity = (e) => {
+    const removedActivity = this.state.scheduledActivities.filter(
+      (act) => act.firebaseKey === e.target.id,
+    );
+    joinTableData.removeScheduledActivities(removedActivity[0].firebaseKey).then(() => {
+      this.getActivities();
+    });
+  }
+
   render() {
     const {
       activities,
@@ -62,7 +71,7 @@ export default class ItineraryBuilder extends React.Component {
       scheduledActivities,
     } = this.state;
     const showSchedule = () => scheduledActivities.map((act) => (
-        <ScheduleCard key={act.firebaseKey} activity={act} />
+        <ScheduleCard key={act.firebaseKey} activity={act} remove={this.removeScheduledActivity}/>
     ));
     return (
       <Container>
