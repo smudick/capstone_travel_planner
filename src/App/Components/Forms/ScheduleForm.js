@@ -9,10 +9,20 @@ export default class ScheduleForm extends Component {
     startTime: this.props.activity?.startTime || '',
     userId: this.props.userId,
     itineraryId: this.props.itineraryId,
+    activityId: this.props.activity?.firebaseKey || '',
     name: this.props.activity?.name || '',
   })
 
   handleChange = (e) => {
+    if (e.target.name === 'name') {
+      this.props.activities.forEach((act) => {
+        if (e.target.value === act.name) {
+          this.setState({
+            activityId: act.firebaseKey,
+          });
+        }
+      });
+    }
     this.setState({
       [e.target.name]: e.target.value,
     });

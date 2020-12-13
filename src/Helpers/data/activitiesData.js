@@ -37,6 +37,18 @@ const editActivity = (actObj) => new Promise((resolve, reject) => {
 });
 
 const deleteActivities = (firebaseKey) => axios.delete(`${baseUrl}/activities/${firebaseKey}.json`);
+// .then(() => {
+//   axios.get(`${baseUrl}/scheduledActivities.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`)
+//     .then((response) => {
+//       const responseArray = Object.values(response);
+//       responseArray.forEach((respArr) => {
+//         const pinBoardIdsArray = Object.keys(respArr);
+//         pinBoardIdsArray.forEach((id) => {
+//           boardData.deletePinBoard(id);
+//         });
+//       });
+//     });
+// });
 
 export default {
   saveSearchResults, getSavedActivities, deleteActivities, editActivity,
