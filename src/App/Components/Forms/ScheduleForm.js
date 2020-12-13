@@ -20,7 +20,9 @@ export default class ScheduleForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    joinTableData.createScheduledActivity(this.state);
+    joinTableData.createScheduledActivity(this.state).then(() => {
+      this.props.update();
+    });
   }
 
   render() {

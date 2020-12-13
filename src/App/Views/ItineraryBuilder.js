@@ -67,6 +67,7 @@ export default class ItineraryBuilder extends React.Component {
               city={city}
               itineraryId={itineraryId}
               userId={userId}
+              update={this.getActivities}
             ></ScheduleForm>
           </ActivityModal>
           <div className='d-flex flex-column align-content-center'>
