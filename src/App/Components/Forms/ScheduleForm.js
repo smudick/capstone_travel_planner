@@ -20,7 +20,7 @@ export default class ScheduleForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.name === '') {
+    if (this.state.firebaseKey === '') {
       joinTableData.createScheduledActivity(this.state).then(() => {
         this.props.update();
       });
