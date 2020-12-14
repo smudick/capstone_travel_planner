@@ -10,7 +10,8 @@ export default class ScheduleCard extends Component {
     const {
       activity, remove, activities, update,
     } = this.props;
-    const endTime = Number(activity.startTime) + Number(activity.length);
+    const timeNum = activity.startTime.split(':');
+    const endTime = Number(timeNum[0]) + Number(activity.length);
     const displayAddress = () => activity.address.map((line) => (
       `${line}
       
@@ -24,7 +25,7 @@ export default class ScheduleCard extends Component {
         color='secondary'
       >
         <CardText>
-          {activity.startTime}:00 - {endTime}:00
+          {activity.startTime} - {endTime}:00
         </CardText>
         <CardTitle tag='h5'>{activity.name}</CardTitle>
         {(Array.isArray(activity.address)) ? (

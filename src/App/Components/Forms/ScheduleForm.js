@@ -32,23 +32,12 @@ export default class ScheduleForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const timeNum = this.state.startTime.split(':');
-    const joinObj = {
-      firebaseKey: this.statefirebaseKey,
-      length: this.state.length,
-      startTime: timeNum[0],
-      userId: this.state.userId,
-      itineraryId: this.state.itineraryId,
-      activityId: this.state.activityId,
-      name: this.state.name,
-      address: this.state.address,
-    };
     if (this.state.firebaseKey === '') {
-      joinTableData.createScheduledActivity(joinObj).then(() => {
+      joinTableData.createScheduledActivity(this.state).then(() => {
         this.props.update();
       });
     } else {
-      joinTableData.editScheduledActivity(joinObj).then(() => {
+      joinTableData.editScheduledActivity(this.state).then(() => {
         this.props.update();
       });
     }
