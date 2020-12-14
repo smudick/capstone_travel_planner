@@ -51,7 +51,7 @@ export default class ScheduleForm extends Component {
       const times = [];
       for (let i = 1; i <= 24; i += 1) {
         times.push(
-          <option>{i}</option>,
+          <option>{i}:00</option>,
         );
       }
       return times;
