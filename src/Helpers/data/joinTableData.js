@@ -22,6 +22,15 @@ const getScheduledActivities = (itineraryId) => new Promise((resolve, reject) =>
     .catch((error) => reject(error));
 });
 
+const getScheduledActivitiesByActivityId = (activityId) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/scheduledActivities.json?orderBy="activityId"&equalTo="${activityId}"`).then((response) => {
+      const itineraryActivities = Object.values(response.data);
+      resolve(itineraryActivities);
+    })
+    .catch((error) => reject(error));
+});
+
 const removeScheduledActivities = (joinTableId) => axios.delete(`${baseUrl}/scheduledActivities/${joinTableId}.json`);
 
 const editScheduledActivity = (obj) => new Promise((resolve, reject) => {
@@ -33,5 +42,5 @@ const editScheduledActivity = (obj) => new Promise((resolve, reject) => {
 });
 
 export default {
-  createScheduledActivity, getScheduledActivities, removeScheduledActivities, editScheduledActivity,
+  createScheduledActivity, getScheduledActivities, removeScheduledActivities, editScheduledActivity, getScheduledActivitiesByActivityId,
 };

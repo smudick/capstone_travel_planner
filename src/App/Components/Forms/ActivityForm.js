@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 import getUid from '../../../Helpers/data/authData';
 import activitiesData from '../../../Helpers/data/activitiesData';
+import joinTableData from '../../../Helpers/data/joinTableData';
 
 export default class ActivityForm extends Component {
   state = {
@@ -60,6 +61,20 @@ export default class ActivityForm extends Component {
         this.setState({
           success: true,
         });
+        joinTableData
+          .getScheduledActivitiesByActivityId(this.state.firebaseKey)
+          .then((response) => {
+            if (response !== {}) {
+              response.forEach((res) => {
+                const obj = {
+                  address: this.state.address,
+                  firebaseKey: res.firebaseKey,
+                  name: this.state.name,
+                };
+                joinTableData.editScheduledActivity(obj);
+              });
+            }
+          });
       });
     }
   };
