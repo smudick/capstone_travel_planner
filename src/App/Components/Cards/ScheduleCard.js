@@ -11,13 +11,6 @@ export default class ScheduleCard extends Component {
       activity, remove, activities, update,
     } = this.props;
     const endTime = Number(activity.startTime) + Number(activity.length);
-    // const showAddress = () => activities.map((act) => {
-    //   let address = '';
-    //   if (act.name === activity.name) {
-    //     address = act.address.toString();
-    //   }
-    //   return address;
-    // });
     const displayAddress = () => activity.address.map((line) => (
       `${line}
       

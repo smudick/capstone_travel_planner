@@ -32,12 +32,23 @@ export default class ScheduleForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const timeNum = this.state.startTime.split(':');
+    const joinObj = {
+      firebaseKey: this.statefirebaseKey,
+      length: this.state.length,
+      startTime: timeNum[0],
+      userId: this.state.userId,
+      itineraryId: this.state.itineraryId,
+      activityId: this.state.activityId,
+      name: this.state.name,
+      address: this.state.address,
+    };
     if (this.state.firebaseKey === '') {
-      joinTableData.createScheduledActivity(this.state).then(() => {
+      joinTableData.createScheduledActivity(joinObj).then(() => {
         this.props.update();
       });
     } else {
-      joinTableData.editScheduledActivity(this.state).then(() => {
+      joinTableData.editScheduledActivity(joinObj).then(() => {
         this.props.update();
       });
     }
@@ -51,7 +62,7 @@ export default class ScheduleForm extends Component {
       const times = [];
       for (let i = 1; i <= 24; i += 1) {
         times.push(
-          <option>{i}</option>,
+          <option>{i}:00</option>,
         );
       }
       return times;
