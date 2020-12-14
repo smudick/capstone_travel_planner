@@ -33,7 +33,6 @@ const editActivity = (actObj) => new Promise((resolve, reject) => {
   axios
     .patch(`${baseUrl}/activities/${actObj.firebaseKey}.json`, actObj)
     .then((response) => {
-      console.warn(response);
       resolve(response);
     }).catch((error) => reject(error));
 });

@@ -67,6 +67,7 @@ export default class ActivityForm extends Component {
             if (response !== {}) {
               response.forEach((res) => {
                 const obj = {
+                  address: this.state.address,
                   firebaseKey: res.firebaseKey,
                   name: this.state.name,
                 };

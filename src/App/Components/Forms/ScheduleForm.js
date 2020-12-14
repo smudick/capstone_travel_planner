@@ -11,6 +11,7 @@ export default class ScheduleForm extends Component {
     itineraryId: this.props.itineraryId,
     activityId: this.props.activity?.activityId || '',
     name: this.props.activity?.name || '',
+    address: this.props.activity?.address || '',
   })
 
   handleChange = (e) => {
@@ -19,6 +20,7 @@ export default class ScheduleForm extends Component {
         if (e.target.value === act.name) {
           this.setState({
             activityId: act.firebaseKey,
+            address: act.address,
           });
         }
       });
