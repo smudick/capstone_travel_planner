@@ -9,7 +9,7 @@ export default class ScheduleForm extends Component {
     startTime: this.props.activity?.startTime || '',
     userId: this.props.userId,
     itineraryId: this.props.itineraryId,
-    activityId: this.props.activity?.firebaseKey || '',
+    activityId: this.props.activity?.activityId || '',
     name: this.props.activity?.name || '',
   })
 
