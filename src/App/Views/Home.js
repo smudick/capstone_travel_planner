@@ -13,24 +13,35 @@ export default class Home extends React.Component {
   componentDidMount() {
     const userID = getUid();
     this.setState({
-      user: userID,
+      userId: userID,
     });
   }
 
   render() {
-    const { user } = this.state;
+    const { userId } = this.state;
     return (
       <>
-        {(user) ? (
+        {userId ? (
           <div>
             <div className='d-flex justify-content-center'>
-              <HomeModal title={'Plan a new trip'} buttonLabel={'Plan A New Trip'} className={'progress-btn'}>
+              <HomeModal
+                title={'Plan a new trip'}
+                buttonLabel={'Plan A New Trip'}
+                className={'progress-btn'}
+              >
                 <CitySelectorForm />
               </HomeModal>
-              <Link to='/saved-itineraries'>
+              <Link to={{
+                pathname: '/saved-itineraries',
+                state: {
+                  userId,
+                },
+              }}>
                 <button className='btn btn-secondary save-btn home-btn'>
                   <h3>View Saved Itineraries</h3>
-                  <div><i className="fas fa-book"></i></div>
+                  <div>
+                    <i className='fas fa-book'></i>
+                  </div>
                 </button>
               </Link>
             </div>
