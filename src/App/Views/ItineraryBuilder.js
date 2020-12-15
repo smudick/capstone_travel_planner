@@ -34,8 +34,10 @@ export default class ItineraryBuilder extends React.Component {
       .getScheduledActivities(this.state.itineraryId)
       .then((response) => {
         function compare(a, b) {
-          const activityA = Number(a.startTime);
-          const activityB = Number(b.startTime);
+          const timeNumA = a.startTime.split(':');
+          const timeNumB = b.startTime.split(':');
+          const activityA = Number(timeNumA[0]);
+          const activityB = Number(timeNumB[0]);
 
           let comparison = 0;
           if (activityA > activityB) {
