@@ -30,14 +30,14 @@ export default function Routes({ user }) {
         />
         <PrivateRoute
           exact
-          path='/saved-itineraries'
-          component={SavedItineraries}
+          path='/single-itinerary:id'
+          component={ItineraryBuilder}
           user={user}
         />
         <PrivateRoute
           exact
-          path='/single-itinerary'
-          component={SingleItinerary}
+          path='/saved-itineraries'
+          component={SavedItineraries}
           user={user}
         />
         <Route component={NotFound}/>

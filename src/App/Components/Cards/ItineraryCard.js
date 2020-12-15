@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Card, CardImg, CardBody, CardTitle, Button,
 } from 'reactstrap';
@@ -40,7 +41,9 @@ export default class ItineraryCard extends Component {
           <CardBody>
             <CardTitle tag='h4'>{itin.city}</CardTitle>
             <CardTitle tag='h5'>{itin.date}</CardTitle>
+            <Link to={`/single-itinerary/${itin.firebaseKey}`}>
             <CardImg src={this.imageSelector()}></CardImg>
+            </Link>
             <Button className='btn btn-danger' id={itin.firebaseKey} onClick={(e) => remove(e)}>Delete</Button>
           </CardBody>
         </Card>

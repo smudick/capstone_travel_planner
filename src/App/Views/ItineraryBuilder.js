@@ -5,6 +5,7 @@ import ActivityModal from '../Components/AppModals/ActivityModal';
 import ScheduleForm from '../Components/Forms/ScheduleForm';
 import itineraryData from '../../Helpers/data/itineraryData';
 import joinTableData from '../../Helpers/data/joinTableData';
+import activitiesData from '../../Helpers/data/activitiesData';
 import ScheduleCard from '../Components/Cards/ScheduleCard';
 
 export default class ItineraryBuilder extends React.Component {
@@ -18,15 +19,31 @@ export default class ItineraryBuilder extends React.Component {
   };
 
   componentDidMount() {
-    let currentItin;
-    itineraryData.getItineraries(this.state.userId).then((response) => {
-      currentItin = response.filter((res) => res.date === this.state.date);
-      const itineraryId = currentItin[0].firebaseKey;
-      this.setState({
-        itineraryId,
+    console.warn(this.props.match.params);
+    if (Object.keys(this.props.match.params).length === 0) {
+      let currentItin;
+      itineraryData.getItineraries(this.state.userId).then((response) => {
+        currentItin = response.filter((res) => res.date === this.state.date);
+        const itineraryId = currentItin[0].firebaseKey;
+        this.setState({
+          itineraryId,
+        });
       });
-      this.getActivities();
-    });
+    } else {
+      const itinFirebaseKey = this.props.match.params.id;
+      itineraryData.getSingleItinerary(itinFirebaseKey).then((response) => {
+        activitiesData.getSavedActivities(response.city, response.userId).then((actResponse) => {
+          this.setState({
+            city: response.city,
+            date: response.date,
+            userId: response.userId,
+            itineraryId: response.firebaseKey,
+            activities: actResponse,
+          });
+        });
+      });
+    }
+    this.getActivities();
   }
 
   getActivities = () => {

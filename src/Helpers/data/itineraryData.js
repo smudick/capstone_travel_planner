@@ -12,6 +12,14 @@ const getItineraries = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getSingleItinerary = (id) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/itineraries.json?orderBy="firebaseKey"&equalTo="${id}"`).then((response) => {
+      resolve(response.data);
+    })
+    .catch((error) => reject(error));
+});
+
 const createItinerary = (itinObj) => new Promise((resolve, reject) => {
   axios
     .post(`${baseUrl}/itineraries.json`, itinObj)
@@ -37,4 +45,6 @@ const deleteItinerary = (firebaseKey) => axios.delete(`${baseUrl}/itineraries/${
       });
   });
 
-export default { getItineraries, createItinerary, deleteItinerary };
+export default {
+  getItineraries, createItinerary, deleteItinerary, getSingleItinerary,
+};
