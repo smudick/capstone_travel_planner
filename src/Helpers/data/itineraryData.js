@@ -1,4 +1,5 @@
 import axios from 'axios';
+import joinTableData from './joinTableData';
 
 const baseUrl = 'https://travel-planner-7b38c-default-rtdb.firebaseio.com';
 
@@ -22,4 +23,18 @@ const createItinerary = (itinObj) => new Promise((resolve, reject) => {
     });
 });
 
-export default { getItineraries, createItinerary };
+const deleteItinerary = (firebaseKey) => axios.delete(`${baseUrl}/itineraries/${firebaseKey}.json`)
+  .then(() => {
+    axios.get(`${baseUrl}/scheduledActivities.json?orderBy="itineraryId"&equalTo="${firebaseKey}"`)
+      .then((response) => {
+        const responseArray = Object.values(response);
+        responseArray.forEach((respArr) => {
+          const scheduledActivitiesIdsArray = Object.keys(respArr);
+          scheduledActivitiesIdsArray.forEach((id) => {
+            joinTableData.removeScheduledActivities(id);
+          });
+        });
+      });
+  });
+
+export default { getItineraries, createItinerary, deleteItinerary };

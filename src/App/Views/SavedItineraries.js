@@ -21,12 +21,21 @@ export default class SavedItineraries extends React.Component {
     });
   };
 
+  removeItins = (e) => {
+    const removedItin = this.state.savedItins.filter(
+      (itin) => itin.firebaseKey === e.target.id,
+    );
+    itineraryData.deleteItinerary(removedItin[0].firebaseKey).then(() => {
+      this.getSavedItins();
+    });
+  }
+
   render() {
     const showSavedItins = () => this.state.savedItins.map((itin) => (
         <ItineraryCard
           key={itin.firebaseKey}
           itin={itin}
-          // remove={this.removeCard}
+          remove={this.removeItins}
         />
     ));
     return (
