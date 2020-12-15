@@ -84,7 +84,7 @@ export default class ItineraryBuilder extends React.Component {
     return (
       <Container>
         <h2>Your {city} adventure is about to begin!</h2>
-        <p>To build out your itinerary, please schedule your activities!</p>
+        <p>To build out your itinerary, please schedule your activities</p>
         <div>
           <ActivityModal
             title={'Schedule a Saved Activity'}
@@ -103,6 +103,15 @@ export default class ItineraryBuilder extends React.Component {
           <div className='d-flex flex-column align-content-center'>
             {showSchedule()}
           </div>
+          <p>Once your schedule is filled up, save your itinerary!</p>
+          <Link to={{
+            pathname: '/saved-itineraries',
+            state: {
+              userId,
+            },
+          }}>
+            <button className='btn saved-btn mt-2'>Save Itinerary</button>
+          </Link>
         </div>
       </Container>
     );
