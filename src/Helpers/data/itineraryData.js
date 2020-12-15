@@ -15,7 +15,7 @@ const getItineraries = (userId) => new Promise((resolve, reject) => {
 const getSingleItinerary = (id) => new Promise((resolve, reject) => {
   axios
     .get(`${baseUrl}/itineraries.json?orderBy="firebaseKey"&equalTo="${id}"`).then((response) => {
-      resolve(response.data);
+      resolve(Object.values(response.data));
     })
     .catch((error) => reject(error));
 });

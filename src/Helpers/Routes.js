@@ -30,7 +30,7 @@ export default function Routes({ user }) {
         />
         <PrivateRoute
           exact
-          path='/single-itinerary:id'
+          path='/single-itinerary/:id'
           component={ItineraryBuilder}
           user={user}
         />
