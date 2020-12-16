@@ -16,11 +16,11 @@ export default class SavedCard extends Component {
     ));
     return (
       <div>
-      <Card>
+      <Card className='saved-card'>
         <a href={activity.url} target='_blank' rel="noreferrer">
-          <CardImg top width="100%" src={activity.image_url} alt={activity.name} />
+          <CardImg className='card-img' top width="100%" src={activity.image_url} alt={activity.name} />
         </a>
-        <CardBody className='saved-card'>
+        <CardBody>
           <CardTitle tag="h5">{activity.name}</CardTitle>
           {activity.yelpId ? (
             <CardSubtitle tag="h6" className="mb-2 text-muted">Rating: {activity.rating} stars from {activity.review_count} reviews</CardSubtitle>
