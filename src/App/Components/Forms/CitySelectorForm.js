@@ -53,6 +53,9 @@ export default class CitySelectorForm extends Component {
           itineraryData.createItinerary(this.state);
         }
       }
+      this.setState({
+        success: true,
+      });
     });
   };
 
@@ -78,25 +81,30 @@ export default class CitySelectorForm extends Component {
           </select>
           <p>Select a Date</p>
           <DateSelector getDate={this.getDate} />
+          {(this.state.success === false) ? (
           <button
               onClick={this.handleSubmit}
               className='btn save-btn mt-3'
             >
               Save Selection
             </button>
-          <Link
-            to={{
-              pathname: '/activities',
-              state: {
-                city: this.state.city,
-                date: this.state.date,
-                userId: this.state.userId,
-              },
-            }}
-          >
-            <button className='btn progress-btn mt-2'>Find Activities</button>
-          </Link>
-
+          ) : (
+          <div className='d-flex flex-column align-items-center'>
+            <div class="alert alert-success" role="alert">Your selection has been saved. Click the button to find activities!</div>
+            <Link
+              to={{
+                pathname: '/activities',
+                state: {
+                  city: this.state.city,
+                  date: this.state.date,
+                  userId: this.state.userId,
+                },
+              }}
+            >
+              <button className='btn progress-btn mt-2'>Find Activities</button>
+            </Link>
+          </div>
+          )}
         </form>
       </div>
     );
