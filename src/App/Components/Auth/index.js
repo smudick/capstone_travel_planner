@@ -11,8 +11,10 @@ export default class Auth extends Component {
 
   render() {
     return (
-      <div className='Auth'>
-        <button className='btn btn-secondary' onClick={this.loginClickEvent}>
+    <div>
+      <h1 className='title'>Travel Planner</h1>
+      <h3 className='subtitle'>Adventure Awaits</h3>
+        <button className='btn progress-btn login' onClick={this.loginClickEvent}>
           Log In
         </button>
       </div>
