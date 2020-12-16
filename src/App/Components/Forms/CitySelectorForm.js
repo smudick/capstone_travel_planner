@@ -63,6 +63,8 @@ export default class CitySelectorForm extends Component {
     return (
       <div>
         <form className='d-flex flex-column align-items-center'>
+          {(this.state.success === false) ? (
+            <div className='d-flex flex-column align-items-center'>
           <p>Select a City</p>
           <select
             name='city'
@@ -81,13 +83,13 @@ export default class CitySelectorForm extends Component {
           </select>
           <p>Select a Date</p>
           <DateSelector getDate={this.getDate} />
-          {(this.state.success === false) ? (
           <button
               onClick={this.handleSubmit}
               className='btn save-btn mt-3'
             >
               Save Selection
             </button>
+            </div>
           ) : (
           <div className='d-flex flex-column align-items-center'>
             <div class="alert alert-success" role="alert">Your selection has been saved. Click the button to find activities!</div>
