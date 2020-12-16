@@ -2,8 +2,17 @@
   background-color: $progress;
   color: #ffffff;
 }
+.progress-btn:hover {
+  background-color: $progress - 25;
+  color: #ffffff;
+}
+
 .save-btn {
   background-color: $saved;
+  color: #ffffff;
+}
+.save-btn:hover {
+  background-color: $saved -25;
   color: #ffffff;
 }
 
@@ -11,8 +20,16 @@
   background-color: $custom;
   color: #ffffff;
 }
+.custom-btn:hover {
+  background-color: $custom -25;
+  color: #ffffff;
+}
 
 .bg-btn {
   background-color: $bg;
+  color: #ffffff;
+}
+.bg-btn:hover {
+  background-color: $bg -25;
   color: #ffffff;
 }
