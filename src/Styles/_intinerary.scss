@@ -1,5 +1,28 @@
-/* Times */
-.agenda .agenda-time {
-  width: 20%;
+.schedule-btn {
+  margin: 2em;
 }
 
+.schedule-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $bg;
+}
+
+.schedule-card-first-line {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.schedule-card-times {
+  align-self: flex-start; 
+}
+
+.schedule-card-delete {
+  align-self: flex-end;
+}
+
+.schedule-card-title {
+  margin-left: -55px;
+}

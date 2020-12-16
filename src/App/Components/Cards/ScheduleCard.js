@@ -19,15 +19,26 @@ export default class ScheduleCard extends Component {
     ));
     return (
       <Card
-        style={{ height: `${activity.length}00px` }}
+        className='schedule-card'
+        style={{ height: `${activity.length}50px` }}
         body
         outline
         color='secondary'
       >
-        <CardText>
+        <div className='schedule-card-first-line'>
+        <CardText className='schedule-card-times'>
           {activity.startTime} - {endTime}:00
         </CardText>
-        <CardTitle tag='h5'>{activity.name}</CardTitle>
+        <CardTitle className='schedule-card-title'tag='h5'>{activity.name}</CardTitle>
+        <Button
+          className='btn btn-danger schedule-card-delete'
+          id={activity.firebaseKey}
+          onClick={(e) => remove(e)}
+        >
+          X
+        </Button>
+        </div>
+        <div className='d-flex flex-column align-items-center'>
         {(Array.isArray(activity.address)) ? (
             <CardText>
                 {displayAddress()}
@@ -35,13 +46,6 @@ export default class ScheduleCard extends Component {
         ) : (
             <CardText>{activity.address}</CardText>
         )}
-        <Button
-          className='btn btn-danger'
-          id={activity.firebaseKey}
-          onClick={(e) => remove(e)}
-        >
-          Remove
-        </Button>
         <ActivityModal
           title={'Edit Activity'}
           buttonLabel={'Edit Activity'}
@@ -53,6 +57,7 @@ export default class ScheduleCard extends Component {
             update={update}
           ></ScheduleForm>
         </ActivityModal>
+        </div>
       </Card>
     );
   }

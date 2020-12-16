@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import { Container, Button } from 'reactstrap';
 import ActivityModal from '../Components/AppModals/ActivityModal';
 import ScheduleForm from '../Components/Forms/ScheduleForm';
 import itineraryData from '../../Helpers/data/itineraryData';
@@ -32,16 +32,18 @@ export default class ItineraryBuilder extends React.Component {
     } else {
       const itinFirebaseKey = this.props.match.params.id;
       itineraryData.getSingleItinerary(itinFirebaseKey).then((response) => {
-        activitiesData.getSavedActivities(response[0].city, response[0].userId).then((actResponse) => {
-          this.setState({
-            city: response[0].city,
-            date: response[0].date,
-            userId: response[0].userId,
-            itineraryId: response[0].firebaseKey,
-            activities: actResponse,
+        activitiesData
+          .getSavedActivities(response[0].city, response[0].userId)
+          .then((actResponse) => {
+            this.setState({
+              city: response[0].city,
+              date: response[0].date,
+              userId: response[0].userId,
+              itineraryId: response[0].firebaseKey,
+              activities: actResponse,
+            });
+            this.getActivities();
           });
-          this.getActivities();
-        });
       });
     }
   }
@@ -75,10 +77,12 @@ export default class ItineraryBuilder extends React.Component {
     const removedActivity = this.state.scheduledActivities.filter(
       (act) => act.firebaseKey === e.target.id,
     );
-    joinTableData.removeScheduledActivities(removedActivity[0].firebaseKey).then(() => {
-      this.getActivities();
-    });
-  }
+    joinTableData
+      .removeScheduledActivities(removedActivity[0].firebaseKey)
+      .then(() => {
+        this.getActivities();
+      });
+  };
 
   render() {
     const {
@@ -96,38 +100,43 @@ export default class ItineraryBuilder extends React.Component {
           activity={act}
           remove={this.removeScheduledActivity}
           update={this.getActivities}
-        />
-    ));
+        />));
     return (
       <Container>
-        <h2>Your {city} adventure is about to begin!</h2>
-        <p>To build out your itinerary, please schedule your activities</p>
+        <h2 className='mb-1'>Your {city} adventure is about to begin!</h2>
+        <p className='m-1'>
+          To build out your itinerary, please schedule your activities
+        </p>
         <div>
-          <ActivityModal
-            title={'Schedule a Saved Activity'}
-            buttonLabel={'Schedule a Saved Activity'}
-            buttonColor={'secondary'}
-          >
-            <ScheduleForm
-              activities={activities}
-              date={date}
-              city={city}
-              itineraryId={itineraryId}
-              userId={userId}
-              update={this.getActivities}
-            ></ScheduleForm>
-          </ActivityModal>
+          <div className='schedule-btn'>
+            <ActivityModal
+              title={'Schedule a Saved Activity'}
+              buttonLabel={'Schedule a Saved Activity'}
+              buttonColor={'secondary'}
+            >
+              <ScheduleForm
+                activities={activities}
+                date={date}
+                city={city}
+                itineraryId={itineraryId}
+                userId={userId}
+                update={this.getActivities}
+              ></ScheduleForm>
+            </ActivityModal>
+          </div>
           <div className='d-flex flex-column align-content-center'>
             {showSchedule()}
           </div>
           <p>Once your schedule is filled up, save your itinerary!</p>
-          <Link to={{
-            pathname: '/saved-itineraries',
-            state: {
-              userId,
-            },
-          }}>
-            <button className='btn saved-btn mt-2'>Save Itinerary</button>
+          <Link
+            to={{
+              pathname: '/saved-itineraries',
+              state: {
+                userId,
+              },
+            }}
+          >
+            <Button className='btn saved-btn mt-2'>Save Itinerary</Button>
           </Link>
         </div>
       </Container>
