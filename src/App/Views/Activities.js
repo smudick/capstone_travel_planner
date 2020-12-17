@@ -121,13 +121,13 @@ export default class Activities extends React.Component {
                 id='activities-search'
                 onChange={this.handleChange}
                 value={this.state.term}
-                placeholder='Example: coffee or Starbucks'
+                placeholder='Ex: coffee or museum'
               />
             </FormGroup>
             <Button className='progress-btn'>Submit</Button>
           </Form>
           <h3 className='mb-4 mt-4'>Or, if you can't find what you're looking for</h3>
-          <ActivityModal title={'Create A Custom Activity'} buttonLabel={'Create A Custom Activity'} buttonColor={'primary'}>
+          <ActivityModal title={'Create A Custom Activity'} buttonLabel={'Create A Custom Activity'} btnClasses={'custom-btn'}>
             <ActivityForm onUpdate={this.getSavedCards} city={city} />
           </ActivityModal>
           </div>

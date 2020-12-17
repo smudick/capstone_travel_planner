@@ -2,11 +2,16 @@
   margin: 2em;
 }
 
+.itin {
+  color: white;
+}
+
 .schedule-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $bg;
+  background-color: $saved;
+  margin: .5em;
 }
 
 .schedule-card-first-line {

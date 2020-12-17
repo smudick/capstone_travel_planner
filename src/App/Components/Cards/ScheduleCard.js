@@ -49,7 +49,7 @@ export default class ScheduleCard extends Component {
         <ActivityModal
           title={'Edit Activity'}
           buttonLabel={'Edit Activity'}
-          buttonColor={'success'}
+          btnClasses={'custom-btn'}
         >
           <ScheduleForm
             activity={activity}

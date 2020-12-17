@@ -8,6 +8,10 @@
   padding: 2em;
 }
 
+.results-card {
+  margin: 1em;
+}
+
 .saved-activities {
   border: $bg solid 1px;
   border-radius: 10px;
@@ -17,4 +21,33 @@
 .saved-card {
   background-color: $saved;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+}
+.card-top {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.card-img-container {
+  width: 30%;
+  justify-self: start;
+}
+
+ .card-img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.title-review {
+  display: flex;
+  flex-direction: column;
+}
+
+.remove-btn-act {
+  height: 25%;
+  margin: .5em;
 }

@@ -18,7 +18,7 @@ export default class MyNavbar extends React.Component {
     return (
       <div>
         {user ? (
-          <Navbar color='light' light expand='md'>
+          <Navbar className='nav' light expand='md'>
             <NavbarBrand href='/'>Travel Planner</NavbarBrand>
             <Nav className='mr-auto' navbar></Nav>
             <NavItem className='logout'>

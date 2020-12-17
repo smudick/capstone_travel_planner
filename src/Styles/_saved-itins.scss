@@ -1,0 +1,19 @@
+.itin-card {
+  width: 500px;
+  margin: 2em;
+  background-color: $progress;
+  color: white;
+  .itin-title {
+    margin-top: -50px;
+  }
+  .card-img {
+    width: 80%;
+    height: 70%;
+    padding-bottom: 2.5em;
+  }
+}
+
+.remove-btn-itin {
+  align-self: flex-end;
+  margin: .5em;
+}

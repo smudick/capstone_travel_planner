@@ -13,10 +13,10 @@ export default class ResultsCard extends Component {
       `
     ));
     return (
-      <div>
+      <div className='results-card'>
       <Card>
         <a href={result.url} target='_blank' rel="noreferrer">
-          <CardImg top width="100%" src={result.image_url} alt={result.name} />
+          <CardImg className='card-img' top width="100%" src={result.image_url} alt={result.name} />
         </a>
         <CardBody>
           <CardTitle tag="h5">{result.name}</CardTitle>

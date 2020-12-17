@@ -12,7 +12,7 @@ const ActivityModal = (props) => {
 
   return (
     <div>
-      <Button color={props.buttonColor} onClick={toggle}>
+      <Button className={props.btnClasses} color={props.buttonColor} onClick={toggle}>
         {buttonLabel}
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
