@@ -104,15 +104,15 @@ export default class ItineraryBuilder extends React.Component {
     return (
       <Container>
         <h2 className='mb-1'>Your {city} adventure is about to begin!</h2>
-        <p className='m-1'>
+        <h6 className='m-3'>
           To build out your itinerary, please schedule your activities
-        </p>
+        </h6>
         <div>
           <div className='schedule-btn'>
             <ActivityModal
               title={'Schedule a Saved Activity'}
-              buttonLabel={'Schedule a Saved Activity'}
-              buttonColor={'secondary'}
+              buttonLabel={'Schedule an Activity'}
+              btnClasses={'progress-btn'}
             >
               <ScheduleForm
                 activities={activities}
@@ -124,10 +124,23 @@ export default class ItineraryBuilder extends React.Component {
               ></ScheduleForm>
             </ActivityModal>
           </div>
-          <div className='d-flex flex-column align-content-center'>
+          <div className='d-flex flex-column align-content-center itin'>
             {showSchedule()}
           </div>
-          <p>Once your schedule is filled up, save your itinerary!</p>
+          <h5 className='m-2'>Once your schedule is filled up, save your itinerary!</h5>
+          <div className='d-flex justify-content-between mb-3'>
+          <Link
+              to={{
+                pathname: '/activities',
+                state: {
+                  city: this.state.city,
+                  date: this.state.date,
+                  userId: this.state.userId,
+                },
+              }}
+            >
+              <Button className='btn custom-btn mt-2'>Add More Activities</Button>
+            </Link>
           <Link
             to={{
               pathname: '/saved-itineraries',
@@ -136,8 +149,9 @@ export default class ItineraryBuilder extends React.Component {
               },
             }}
           >
-            <Button className='btn saved-btn mt-2'>Save Itinerary</Button>
+            <Button className='btn progress-btn mt-2'>Save Itinerary</Button>
           </Link>
+          </div>
         </div>
       </Container>
     );

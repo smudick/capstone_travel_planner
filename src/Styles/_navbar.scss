@@ -1,3 +1,13 @@
 .logout {
   list-style: none;
 }
+
+.nav {
+  background-color: $saved;
+  height: 75%;
+  .navbar-brand {
+    color: white;
+    font-family: 'Sacramento', cursive;
+    font-size: 35px;
+  }
+}

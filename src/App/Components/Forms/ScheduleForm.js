@@ -99,7 +99,7 @@ export default class ScheduleForm extends Component {
             <option>4</option>
             <option>5</option>
           </Input>
-          <Button>Submit</Button>
+          <Button className='progress-btn'>Submit</Button>
         </Form>
       </div>
     );

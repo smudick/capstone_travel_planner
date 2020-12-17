@@ -4,7 +4,6 @@ import Home from '../App/Views/Home';
 import Activities from '../App/Views/Activities';
 import ItineraryBuilder from '../App/Views/ItineraryBuilder';
 import SavedItineraries from '../App/Views/SavedItineraries';
-import SingleItinerary from '../App/Views/SingleItinerary';
 import NotFound from '../App/Views/NotFound';
 
 export default function Routes({ user }) {

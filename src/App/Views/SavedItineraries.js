@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import itineraryData from '../../Helpers/data/itineraryData';
 import ItineraryCard from '../Components/Cards/ItineraryCard';
 

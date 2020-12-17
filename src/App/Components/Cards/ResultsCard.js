@@ -13,7 +13,7 @@ export default class ResultsCard extends Component {
       `
     ));
     return (
-      <div>
+      <div className='results-card'>
       <Card>
         <a href={result.url} target='_blank' rel="noreferrer">
           <CardImg className='card-img' top width="100%" src={result.image_url} alt={result.name} />

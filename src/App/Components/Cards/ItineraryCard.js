@@ -37,14 +37,14 @@ export default class ItineraryCard extends Component {
     const { itin, remove } = this.props;
     return (
       <div>
-        <Card className='progress-btn home-btn'>
+        <Card className='itin-card'>
+            <Button className='btn btn-danger remove-btn-itin' id={itin.firebaseKey} onClick={(e) => remove(e)}>X</Button>
           <CardBody>
-            <CardTitle tag='h4'>{itin.city}</CardTitle>
+            <CardTitle className='itin-title' tag='h3'>{itin.city}</CardTitle>
             <CardTitle tag='h5'>{itin.date}</CardTitle>
             <Link to={`/single-itinerary/${itin.firebaseKey}`}>
             <CardImg src={this.imageSelector()}></CardImg>
             </Link>
-            <Button className='btn btn-danger' id={itin.firebaseKey} onClick={(e) => remove(e)}>Delete</Button>
           </CardBody>
         </Card>
       </div>
