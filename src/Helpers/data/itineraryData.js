@@ -45,6 +45,7 @@ const deleteItinerary = (firebaseKey) => axios.delete(`${baseUrl}/itineraries/${
       });
   });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getItineraries, createItinerary, deleteItinerary, getSingleItinerary,
 };

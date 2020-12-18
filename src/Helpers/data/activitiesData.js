@@ -51,6 +51,7 @@ const deleteActivities = (firebaseKey) => axios.delete(`${baseUrl}/activities/${
       });
   });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   saveSearchResults, getSavedActivities, deleteActivities, editActivity,
 };
