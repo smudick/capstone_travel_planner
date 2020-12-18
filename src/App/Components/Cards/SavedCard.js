@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Card, CardImg, CardText, CardBody,
+  Card, CardImg, CardText,
   CardTitle, CardSubtitle, Button,
 } from 'reactstrap';
 import ActivityModal from '../AppModals/ActivityModal';

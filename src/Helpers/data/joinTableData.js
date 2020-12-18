@@ -41,6 +41,7 @@ const editScheduledActivity = (obj) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   createScheduledActivity, getScheduledActivities, removeScheduledActivities, editScheduledActivity, getScheduledActivitiesByActivityId,
 };
