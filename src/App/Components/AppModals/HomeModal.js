@@ -10,9 +10,9 @@ const HomeModal = (props) => {
 
   return (
     <div>
-      <Button className='btn btn-success progress-btn home-btn' onClick={toggle}>
+      <Button className='btn progress-btn home-btn' onClick={toggle}>
         <h3>Plan a New Trip</h3>
-        <div><i className="fas fa-plus"></i></div>
+        <div><i className='fas fa-plus'></i></div>
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={'black-text'}>
         <ModalHeader toggle={toggle}>Where are you off to?</ModalHeader>
@@ -20,7 +20,7 @@ const HomeModal = (props) => {
           {props.children}
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
+          <Button color='secondary' onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>

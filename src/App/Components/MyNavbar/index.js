@@ -24,10 +24,10 @@ export default class MyNavbar extends React.Component {
             <NavItem className='logout'>
               {user && (
                 <button
-                  className='nav-link btn btn-danger m-2'
+                  className='nav-link btn btn-logout m-2'
                   onClick={this.logMeOut}
                 >
-                  Logout
+                  Logout <i className='fa fa-sign-out-alt'></i>
                 </button>
               )}
             </NavItem>

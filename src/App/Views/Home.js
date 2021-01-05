@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import Auth from '../Components/Auth';
 import getUid from '../../Helpers/data/authData';
 import HomeModal from '../Components/AppModals/HomeModal';
@@ -31,19 +32,22 @@ export default class Home extends React.Component {
               >
                 <CitySelectorForm />
               </HomeModal>
-              <Link to={{
-                pathname: '/saved-itineraries',
-                state: {
-                  userId,
-                },
-              }}>
-                <button className='btn btn-secondary save-btn home-btn'>
+              <Button className='btn save-btn home-btn'>
+                <Link
+                className='save-btn'
+                  to={{
+                    pathname: '/saved-itineraries',
+                    state: {
+                      userId,
+                    },
+                  }}
+                >
                   <h3>View Saved Itineraries</h3>
                   <div>
                     <i className='fas fa-book'></i>
                   </div>
-                </button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         ) : (

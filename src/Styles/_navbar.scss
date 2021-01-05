@@ -10,4 +10,16 @@
     font-family: 'Sacramento', cursive;
     font-size: 35px;
   }
+  .navbar-brand:hover {
+    color: $progress;
+  }
+}
+
+.btn-logout {
+  font-size: 22px;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+.btn-logout:hover {
+  color: $progress;
 }
