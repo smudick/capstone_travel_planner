@@ -22,9 +22,9 @@ export default class SavedCard extends Component {
           <CardImg className='card-img' top src={activity.image_url} alt={activity.name} />
         </a>
         <div className='title-review'>
-          <CardTitle className='m-1' tag="h4">{activity.name}</CardTitle>
+          <CardTitle className='m-1' tag='h4'>{activity.name}</CardTitle>
           {activity.yelpId ? (
-            <CardSubtitle tag="h6" className="m-1 text-muted">Rating: {activity.rating} stars from {activity.review_count} reviews</CardSubtitle>
+            <CardSubtitle tag='h6' className='m-1 text-muted'>Rating: {activity.rating} stars from {activity.review_count} reviews</CardSubtitle>
           ) : (
             <></>
           )}

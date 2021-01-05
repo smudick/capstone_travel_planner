@@ -123,7 +123,7 @@ export default class ActivityForm extends Component {
           accept='image/*'
           onChange={this.handleChange}
         />
-        <button className='btn btn-success'>Submit</button>
+        <button className='btn progress-btn'>Submit</button>
       </form>
     );
   }

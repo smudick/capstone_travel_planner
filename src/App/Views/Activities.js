@@ -111,7 +111,7 @@ export default class Activities extends React.Component {
     ));
     return (
       <div>
-        <div className="d-flex flex-column align-items-center">
+        <div className='d-flex flex-column align-items-center'>
           <h2 className='mb-4 mt-2'>Search for things to do in {city}</h2>
           <Form inline onSubmit={this.handleSearch}>
             <FormGroup className='mb-4 mr-sm-2 mb-sm-0'>
@@ -131,9 +131,9 @@ export default class Activities extends React.Component {
             <ActivityForm onUpdate={this.getSavedCards} city={city} />
           </ActivityModal>
           </div>
-          <div className="container mb-4 mt-4">
-            <div className="row">
-              <div className="col">
+          <div className='container mb-4 mt-4'>
+            <div className='row'>
+              <div className='col'>
                 <h4>
                 Search Results
                 </h4>
@@ -147,7 +147,7 @@ export default class Activities extends React.Component {
                   )}
                 </div>
               </div>
-              <div className="col">
+              <div className='col'>
                 <h4>
                   Saved Activities
                 </h4>

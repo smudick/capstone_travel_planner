@@ -15,12 +15,12 @@ export default class ResultsCard extends Component {
     return (
       <div className='results-card'>
       <Card>
-        <a href={result.url} target='_blank' rel="noreferrer">
-          <CardImg className='card-img' top width="100%" src={result.image_url} alt={result.name} />
+        <a href={result.url} target='_blank' rel='noreferrer'>
+          <CardImg className='card-img' top width='100%' src={result.image_url} alt={result.name} />
         </a>
         <CardBody>
-          <CardTitle tag="h5">{result.name}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">Rating: {result.rating} stars from {result.review_count} reviews</CardSubtitle>
+          <CardTitle tag='h5'>{result.name}</CardTitle>
+          <CardSubtitle tag='h6' className='mb-2 text-muted'>Rating: {result.rating} stars from {result.review_count} reviews</CardSubtitle>
           <CardText>
               {displayAddress()}
           </CardText>
