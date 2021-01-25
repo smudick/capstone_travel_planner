@@ -5,7 +5,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c44b79f2-12aa-4ad6-9ef2-2c2d4a7bc1b1/deploy-status)](https://app.netlify.com/sites/sm-travel-planner/deploys)
 
 ## User Story
-![screencapture-localhost-3000-2020-12-18-18_29_05](https://user-images.githubusercontent.com/65687019/102676617-07e64a80-4164-11eb-977e-fd4fbe2bc522.png)
+![screencapture-sm-travel-planner-netlify-app-2021-01-24-21_10_39](https://user-images.githubusercontent.com/65687019/105656893-e24a1080-5e88-11eb-97d7-17e579593c9f.png)
 When logged in to Travel Planner, a user should be able to plan and view their ideal travel itinerary. 
 
 ### Home Page
