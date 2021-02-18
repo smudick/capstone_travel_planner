@@ -1,33 +1,13 @@
 import React, { Component } from 'react';
+import { Spinner } from 'reactstrap';
 
 export default class Loader extends Component {
   render() {
     return (
       <>
-        <div className='spinner-border text-primary' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-secondary' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-success' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-danger' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-warning' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-info' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-light' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
-        <div className='spinner-border text-dark' role='status'>
-          <span className='sr-only'>Loading...</span>
-        </div>
+        <Spinner style={{ width: '2rem', height: '2rem' }} type='grow' className='loader-progress'/>
+        <Spinner style={{ width: '2rem', height: '2rem' }} type='grow' className='loader-custom-dark'/>
+        <Spinner style={{ width: '2rem', height: '2rem' }} type='grow' className='loader-saved-dark'/>
       </>
     );
   }
