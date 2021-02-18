@@ -92,7 +92,7 @@ export default class CitySelectorForm extends Component {
             </div>
           ) : (
           <div className='d-flex flex-column align-items-center'>
-            <div class="alert alert-success" role="alert">Your selection has been saved. Click the button to find activities!</div>
+            <div className="alert alert-success" role="alert">Your selection has been saved. Click the button to find activities!</div>
             <Link
               to={{
                 pathname: '/activities',
