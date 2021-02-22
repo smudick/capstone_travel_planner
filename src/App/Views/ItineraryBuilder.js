@@ -124,8 +124,10 @@ export default class ItineraryBuilder extends React.Component {
               ></ScheduleForm>
             </ActivityModal>
           </div>
-          <div className='d-flex flex-column align-content-center itin'>
-            {showSchedule()}
+          <div className='itin-container'>
+            <div className='d-flex flex-column align-content-center itin'>
+              {showSchedule()}
+            </div>
           </div>
           <h5 className='m-2'>Once your schedule is filled up, save your itinerary!</h5>
           <div className='d-flex justify-content-between mb-3'>
