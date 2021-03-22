@@ -40,7 +40,7 @@ export default class Activities extends React.Component {
     });
 
     yelpCall(this.state.city, this.state.term).then((response) => {
-      const resultsArr = response[0].slice(0, 5);
+      const resultsArr = response.slice(0, 5);
       const cleanResults = resultsArr.map((res) => (
         {
           yelpId: res.id,
