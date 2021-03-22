@@ -11,6 +11,8 @@
     "bootstrap": "^4.5.3",
     "firebase": "^8.1.2",
     "materialize-css": "^1.0.0-rc.2",
+    "netlify-cli": "^3.13.3",
+    "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-datepicker": "^3.3.0",
@@ -18,13 +20,15 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "reactstrap": "^8.7.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yelp-fusion": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "npm run build && firebase deploy",
+    "prebuild": "cd functions/get-yelp && npm install"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +50,7 @@
   },
   "devDependencies": {
     "eslint-config-airbnb-base": "^14.2.1",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "netlify-cli": "3.13.3"
   }
 }

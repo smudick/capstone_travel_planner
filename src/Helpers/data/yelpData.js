@@ -1,19 +1,14 @@
 import axios from 'axios';
 
-const yelpUrl = 'https://api.yelp.com/v3/businesses/search';
-
 const yelpQuery = (location, term) => new Promise((resolve, reject) => {
   axios
-    .get(`${'https://cors-anywhere.herokuapp.com/'}${yelpUrl}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-      },
+    .get('/.netlify/functions/get-yelp', {
       params: {
         location: `${location}`,
         term: `${term}`,
       },
     }).then((response) => {
-      resolve(Object.values(response.data));
+      resolve(Object.values(response.data.results.jsonBody.businesses));
     })
     .catch((error) => reject(error));
 });
