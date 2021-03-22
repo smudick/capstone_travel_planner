@@ -26,9 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy",
-    "prebuild": "cd functions/get-yelp && npm install"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
